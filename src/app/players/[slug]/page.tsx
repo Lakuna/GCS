@@ -29,6 +29,7 @@ import { redirect } from "next/navigation";
 import sortAccountsByRank from "util/sortAccountsByRank";
 import style from "./page.module.scss";
 import ugg from "util/ugg";
+import opgg from "util/opgg";
 
 /**
  * Parameters that are passed to a player page.
@@ -152,6 +153,8 @@ export default async function Page(
 									<>
 										{" | "}
 										<Link href={ugg(...accounts)}>{"U.GG"}</Link>
+										{" | "}
+										<Link href={opgg(...accounts)}>{"OP.GG"}</Link>
 									</>
 								)}
 							</h2>
