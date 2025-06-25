@@ -12,7 +12,7 @@ export default interface LeagueEntryDto {
 	leagueId: string;
 
 	/** The summoner ID of the summoner. */
-	summonerId: string;
+	// `summonerId: string;` // Removed
 
 	/** The queue type. */
 	queueType: QueueType;

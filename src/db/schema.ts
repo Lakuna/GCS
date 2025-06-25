@@ -193,11 +193,12 @@ export const sessionTable = pgTable("session", {
 export const accountTable = pgTable(
 	"account",
 	{
-		// The encrypted Riot account ID of the account. 56 character maximum length.
-		accountId: varchar({ length: 56 }).notNull(),
-
 		// The date and time that the account was last cached.
 		cacheDate: timestamp().notNull().defaultNow(),
+
+		// The encrypted Riot account ID of the account. 56 character maximum length. Removed from the Riot API.
+		// eslint-disable-next-line sort-keys
+		accountId: varchar({ length: 56 }),
 
 		// Whether or not this account is the primary account of the associated player. Must be null for non-primary accounts.
 		isPrimary: boolean(),
@@ -225,8 +226,8 @@ export const accountTable = pgTable(
 		// The account's platform (region) ID (i.e. `"NA1"` for North America).
 		region: platformEnum().notNull(),
 
-		// The encrypted account's summoner ID. 63 character maximum length.
-		summonerId: varchar({ length: 63 }).notNull(),
+		// The encrypted account's summoner ID. 63 character maximum length. Removed from the Riot API.
+		summonerId: varchar({ length: 63 }),
 
 		// The tag line of the account at the last time that the account was cached. The longest allowed tag line is 5 characters.
 		tagLine: varchar({ length: 5 }).notNull(),

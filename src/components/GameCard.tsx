@@ -45,7 +45,7 @@ export interface GameCardProps extends Omit<LinkProps, "children" | "href"> {
 	pov?: number | undefined;
 
 	/** Whether or not to show all details on the card. Applicable only to individual player game result cards. */
-	extended?: boolean | undefined; // TODO
+	extended?: boolean | undefined;
 }
 
 /**

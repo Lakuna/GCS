@@ -3,7 +3,7 @@ import { accountTable } from "db/schema";
 import db from "db/db";
 import { eq } from "drizzle-orm";
 import getAccountByPuuid from "riot/getAccountByPuuid";
-import getLeagueEntriesBySummonerId from "riot/getLeagueEntriesBySummonerId";
+import getLeagueEntriesByPuuid from "riot/getLeagueEntriesByPuuid";
 import getSummonerByPuuid from "riot/getSummonerByPuuid";
 
 /**
@@ -23,8 +23,8 @@ export default async function updateAccount({
 >): Promise<void> {
 	// Make Riot API calls.
 	const summonerDto = await getSummonerByPuuid(puuid, region);
-	const leagueEntries = await getLeagueEntriesBySummonerId(
-		summonerDto.id,
+	const leagueEntries = await getLeagueEntriesByPuuid(
+		summonerDto.puuid,
 		region
 	);
 	const newAccount = await getAccountByPuuid(puuid);

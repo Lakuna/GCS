@@ -4,7 +4,7 @@
  */
 export default interface SummonerDto {
 	/** The encrypted account ID. */
-	accountId: string;
+	// `accountId: string;` // Removed
 
 	/** The summoner's profile icon ID. */
 	profileIconId: number;
@@ -13,7 +13,7 @@ export default interface SummonerDto {
 	revisionDate: number;
 
 	/** Encrypted summoner ID. */
-	id: string;
+	// `id: string;` // Removed
 
 	/** Encrypted player universally unique ID. */
 	puuid: string;

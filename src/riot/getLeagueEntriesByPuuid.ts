@@ -10,18 +10,17 @@ import riotFetch from "./riotFetch";
  * @param key - The Riot API key to use.
  * @returns The league entry.
  * @throws `Error` if the response has a bad status or if the Riot API key is missing.
- * @deprecated Removed from the Riot API.
  * @public
  */
-export default async function getLeagueEntriesBySummonerId(
-	id: string,
+export default async function getLeagueEntriesByPuuid(
+	puuid: string,
 	platform: Platform = Platform.NA1,
 	key: string | undefined = void 0
 ): Promise<LeagueEntryDto[]> {
 	return (await (
 		await riotFetch(
 			new URL(
-				`/lol/league/v4/entries/by-summoner/${id}`,
+				`/lol/league/v4/entries/by-puuid/${puuid}`,
 				getRiotApiBaseUrl(platform)
 			).href,
 			void 0,

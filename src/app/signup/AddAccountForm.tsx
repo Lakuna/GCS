@@ -10,7 +10,7 @@ import db from "db/db";
 import { eq } from "drizzle-orm";
 import getAccountByGameName from "riot/getAccountByGameName";
 import getFormField from "util/getFormField";
-import getLeagueEntriesBySummonerId from "riot/getLeagueEntriesBySummonerId";
+import getLeagueEntriesByPuuid from "riot/getLeagueEntriesByPuuid";
 import getPlayerUrl from "util/getPlayerUrl";
 import getSummonerByPuuid from "riot/getSummonerByPuuid";
 import hasRiotApiKey from "util/hasRiotApiKey";
@@ -92,7 +92,7 @@ export default function AddAccountForm({
 					platform
 				);
 				const soloLeagueEntry = (
-					await getLeagueEntriesBySummonerId(summonerDto.id, platform)
+					await getLeagueEntriesByPuuid(summonerDto.puuid, platform)
 				).find((leagueEntry) => leagueEntry.queueType === QueueType.SOLO);
 
 				// Ensure that the profile icon ID to verify the account is not the summoner's current profile icon ID.
@@ -103,14 +103,12 @@ export default function AddAccountForm({
 				}
 
 				await db.insert(accountTable).values({
-					accountId: summonerDto.accountId,
 					isPrimary: accounts.length ? void 0 : true,
 					name: accountDto.gameName,
 					playerId: player.id,
 					puuid: summonerDto.puuid,
 					rank: soloLeagueEntry?.rank ?? AccountRank.IV,
 					region: platform,
-					summonerId: summonerDto.id,
 					tagLine: accountDto.tagLine,
 					tier: soloLeagueEntry?.tier ?? AccountTier.IRON,
 					verifyIcon
