@@ -13,8 +13,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to an update skin form.
  * @public
  */
-export interface UpdateSkinFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface UpdateSkinFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The current player. */
 	player: typeof playerTable.$inferSelect;
 

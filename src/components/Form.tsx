@@ -45,11 +45,13 @@ export default function Form({
 				return (await action(payload)) ?? void 0;
 			} catch (error) {
 				// Error messages are obfuscated in production. Return a string to show an error message to users.
-				return isDev
-					? error instanceof Error
-						? error.message
-						: "Error."
-					: "There was an error submitting the form. Did you fill out any fields?";
+				return (
+					isDev ?
+						error instanceof Error ?
+							error.message
+						:	"Error."
+					:	"There was an error submitting the form. Did you fill out any fields?"
+				);
 			}
 		},
 		void 0

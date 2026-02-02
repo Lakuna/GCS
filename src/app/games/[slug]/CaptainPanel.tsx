@@ -13,8 +13,10 @@ import SubmitResultsForm from "./captain/SubmitResultsForm";
  * Properties that can be passed to a captain panel.
  * @public
  */
-export interface CaptainPanelProps
-	extends Omit<JSX.IntrinsicElements["div"], "children"> {
+export interface CaptainPanelProps extends Omit<
+	JSX.IntrinsicElements["div"],
+	"children"
+> {
 	/** The game to import results for. */
 	game: typeof gameTable.$inferSelect;
 

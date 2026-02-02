@@ -10,8 +10,10 @@ import UpdateTeamForm from "./admin/UpdateTeamForm";
  * Properties that can be passed to an admin panel.
  * @public
  */
-export interface AdminPanelProps
-	extends Omit<JSX.IntrinsicElements["div"], "children"> {
+export interface AdminPanelProps extends Omit<
+	JSX.IntrinsicElements["div"],
+	"children"
+> {
 	/** The team to modify. */
 	team: typeof teamTable.$inferSelect;
 

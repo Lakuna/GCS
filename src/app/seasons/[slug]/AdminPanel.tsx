@@ -12,8 +12,10 @@ import getSeasonUrl from "util/getSeasonUrl";
  * Properties that can be passed to an admin panel.
  * @public
  */
-export interface AdminPanelProps
-	extends Omit<JSX.IntrinsicElements["div"], "children"> {
+export interface AdminPanelProps extends Omit<
+	JSX.IntrinsicElements["div"],
+	"children"
+> {
 	/** The current season. */
 	season: typeof seasonTable.$inferSelect;
 

@@ -45,13 +45,7 @@ export const metadata = {
 	authors: [{ name: "Travis Martin", url: "https://www.lakuna.pw" }],
 	creator: "Travis Martin",
 	metadataBase: new URL(domain),
-	openGraph: {
-		siteName: "Gauntlet Championship Series",
-		type: "website"
-	},
+	openGraph: { siteName: "Gauntlet Championship Series", type: "website" },
 	publisher: "Travis Martin",
-	title: {
-		default: "Page",
-		template: "%s | GCS"
-	}
+	title: { default: "Page", template: "%s | GCS" }
 } satisfies Metadata;

@@ -8,10 +8,7 @@ import domain from "util/domain";
  */
 export default function robots(): MetadataRoute.Robots {
 	return {
-		rules: {
-			allow: "/",
-			userAgent: "*"
-		},
+		rules: { allow: "/", userAgent: "*" },
 		sitemap: new URL("/sitemap.xml", domain).href
 	};
 }

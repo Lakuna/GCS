@@ -24,11 +24,11 @@ export default async function makeTournament(
 				.href,
 			{
 				body: JSON.stringify(
-					params
-						? typeof params === "string"
-							? { name: params, providerId: (await getTournamentProvider()).id }
-							: params
-						: { providerId: (await getTournamentProvider()).id }
+					params ?
+						typeof params === "string" ?
+							{ name: params, providerId: (await getTournamentProvider()).id }
+						:	params
+					:	{ providerId: (await getTournamentProvider()).id }
 				),
 				method: "POST"
 			},

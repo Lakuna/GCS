@@ -1,19 +1,19 @@
-import { config, configs, parser, plugin } from "typescript-eslint";
-import { FlatCompat } from "@eslint/eslintrc";
-import { dirname } from "node:path";
+import { configs, parser, plugin } from "typescript-eslint";
+import { defineConfig } from "eslint/config";
 import eslint from "@eslint/js";
-import { fileURLToPath } from "node:url";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTypescript from "eslint-config-next/typescript";
 import prettier from "eslint-plugin-prettier/recommended";
+import tsdoc from "eslint-plugin-tsdoc";
 
 /**
  * ESLint configuration options.
  * @internal
  */
-export default config(
+export default defineConfig(
 	// Next.js ESLint rules.
-	...new FlatCompat({
-		baseDirectory: dirname(fileURLToPath(import.meta.url))
-	}).extends("next/core-web-vitals", "next/typescript"),
+	...nextVitals,
+	...nextTypescript,
 
 	// Enable all ESLint rules.
 	eslint.configs.all,
@@ -60,19 +60,14 @@ export default config(
 	{
 		languageOptions: {
 			parser,
-			parserOptions: {
-				ecmaVersion: "latest",
-				project: true,
-				tsconfigRootDir: "."
-			}
+			parserOptions: { ecmaVersion: "latest", project: true }
 		},
-		plugins: {
-			"@typescript-eslint": plugin
-		},
-		rules: {
-			"@typescript-eslint/no-shadow": "error"
-		}
+		plugins: { "@typescript-eslint": plugin },
+		rules: { "@typescript-eslint/no-shadow": "error" }
 	},
+
+	// Enable the TSDoc plugin.
+	{ plugins: { tsdoc }, rules: { "tsdoc/syntax": "error" } },
 
 	// Enable the Prettier plugin.
 	prettier // Includes `eslint-config-prettier` and `eslint-plugin-prettier`.

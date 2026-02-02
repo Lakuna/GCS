@@ -17,8 +17,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to a sign-up form.
  * @public
  */
-export interface SignUpFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface SignUpFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The player to sign up for the next season. */
 	player: typeof playerTable.$inferSelect;
 
@@ -71,11 +73,13 @@ export default function SignUpForm({
 					return "You must have at least one verified account to sign up.";
 				}
 
-				await db.insert(draftPlayerTable).values({
-					notes: getFormField(form, "notes", true),
-					playerId: player.id,
-					seasonId: season.id
-				});
+				await db
+					.insert(draftPlayerTable)
+					.values({
+						notes: getFormField(form, "notes", true),
+						playerId: player.id,
+						seasonId: season.id
+					});
 				revalidatePath("/signup");
 				return void 0;
 			}}

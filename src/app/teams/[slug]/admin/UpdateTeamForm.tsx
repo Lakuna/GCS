@@ -14,8 +14,10 @@ import { teamTable } from "db/schema";
  * Properties that can be passed to a create team form.
  * @public
  */
-export interface UpdateTeamFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface UpdateTeamFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The team to modify. */
 	team: typeof teamTable.$inferSelect;
 }
@@ -43,9 +45,8 @@ export default function UpdateTeamForm({
 					.set({
 						code: getFormField(form, "code"),
 						color: getFormField(form, "color")?.substring(1), // Cut off pound.
-						draftOrder: draftOrderString
-							? parseInt(draftOrderString, 10)
-							: void 0,
+						draftOrder:
+							draftOrderString ? parseInt(draftOrderString, 10) : void 0,
 						isWinner: Boolean(getFormField(form, "isWinner")) || null,
 						logoUrl: getFormField(form, "logoUrl"),
 						name: getFormField(form, "name"),

@@ -10,7 +10,7 @@ import { eq } from "drizzle-orm";
  */
 export interface GetDocumentParams {
 	/** The ID of the document. */
-	id: `${number}`;
+	id: string; // `${number}`;
 }
 
 /**

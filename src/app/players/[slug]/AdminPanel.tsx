@@ -8,8 +8,10 @@ import MakeAdminForm from "./admin/MakeAdminForm";
  * Properties that can be passed to an admin panel.
  * @public
  */
-export interface AdminPanelProps
-	extends Omit<JSX.IntrinsicElements["div"], "children"> {
+export interface AdminPanelProps extends Omit<
+	JSX.IntrinsicElements["div"],
+	"children"
+> {
 	/** The player to modify. */
 	player: typeof playerTable.$inferSelect;
 

@@ -32,10 +32,9 @@ export default async function Page(): Promise<JSX.Element> {
 			<header>
 				<h1>{"Gauntlet Championship Series"}</h1>
 			</header>
-			{streamData ? (
+			{streamData ?
 				<TwitchStream parent={raw} channel={streamData.user_login} muted />
-			) : (
-				<YoutubeVideo
+			:	<YoutubeVideo
 					id="qYLGDygZXnk"
 					autoPlay
 					fs={false}
@@ -45,7 +44,7 @@ export default async function Page(): Promise<JSX.Element> {
 					sandbox="allow-popups allow-same-origin allow-scripts"
 					loading="lazy"
 				/>
-			)}
+			}
 			<ul className={style["socials"]}>
 				<Link href="https://discord.gg/gcsleague">
 					<BsDiscord />

@@ -19,8 +19,10 @@ import ugg from "util/ugg";
  * Properties that can be passed to a draft player form.
  * @public
  */
-export interface DraftPlayerFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface DraftPlayerFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The draft player. */
 	draftPlayer: typeof draftPlayerTable.$inferSelect;
 
@@ -71,7 +73,7 @@ export default function DraftPlayerForm({
 						{player.displayName ?? player.name}
 					</Link>
 				</h3>
-				{highestRankedAccount ? (
+				{highestRankedAccount ?
 					<p>
 						{`${highestRankedAccount.tier} ${highestRankedAccount.rank} - `}
 						{player.primaryRole && player.secondaryRole && (
@@ -79,12 +81,11 @@ export default function DraftPlayerForm({
 						)}
 						<Link href={ugg(...accounts)}>{"U.GG"}</Link>
 					</p>
-				) : (
-					player.primaryRole &&
+				:	player.primaryRole &&
 					player.secondaryRole && (
 						<p>{`${player.primaryRole}/${player.secondaryRole}`}</p>
 					)
-				)}
+				}
 				{draftPlayer.notes && <p>{`Notes: ${draftPlayer.notes}`}</p>}
 			</header>
 			<p>

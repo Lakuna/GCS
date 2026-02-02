@@ -13,8 +13,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to an update blurb form.
  * @public
  */
-export interface UpdateBlurbFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface UpdateBlurbFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The existing blurb text. */
 	text?: string | undefined;
 }

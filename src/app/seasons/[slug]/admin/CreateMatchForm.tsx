@@ -13,8 +13,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to a create match form.
  * @public
  */
-export interface CreateMatchFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface CreateMatchFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The current season. */
 	season: typeof seasonTable.$inferSelect;
 

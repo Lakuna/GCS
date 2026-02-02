@@ -23,8 +23,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to a forfeit form.
  * @public
  */
-export interface ForfeitFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface ForfeitFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The game to set a forfeit for. */
 	game: typeof gameTable.$inferSelect;
 

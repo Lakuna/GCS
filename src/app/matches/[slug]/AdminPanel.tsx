@@ -7,8 +7,10 @@ import type { matchTable } from "db/schema";
  * Properties that can be passed to an admin panel.
  * @public
  */
-export interface AdminPanelProps
-	extends Omit<JSX.IntrinsicElements["div"], "children"> {
+export interface AdminPanelProps extends Omit<
+	JSX.IntrinsicElements["div"],
+	"children"
+> {
 	/** The current match. */
 	match: typeof matchTable.$inferSelect;
 }

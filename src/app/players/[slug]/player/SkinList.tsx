@@ -5,8 +5,10 @@ import getChampion from "riot/getChampion";
  * Properties that can be passed to a list of skins.
  * @public
  */
-export interface SkinListProps
-	extends Omit<JSX.IntrinsicElements["select"], "children"> {
+export interface SkinListProps extends Omit<
+	JSX.IntrinsicElements["select"],
+	"children"
+> {
 	/** The ID of the champion to list skins for. */
 	championId: string;
 }

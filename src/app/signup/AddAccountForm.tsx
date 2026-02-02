@@ -20,8 +20,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to an add account form.
  * @public
  */
-export interface AddAccountFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface AddAccountFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The player to add the account to. */
 	player: typeof playerTable.$inferSelect;
 
@@ -102,17 +104,19 @@ export default function AddAccountForm({
 					verifyIcon = (verifyIcon + 1) % starterPackMaxId;
 				}
 
-				await db.insert(accountTable).values({
-					isPrimary: accounts.length ? void 0 : true,
-					name: accountDto.gameName,
-					playerId: player.id,
-					puuid: summonerDto.puuid,
-					rank: soloLeagueEntry?.rank ?? AccountRank.IV,
-					region: platform,
-					tagLine: accountDto.tagLine,
-					tier: soloLeagueEntry?.tier ?? AccountTier.IRON,
-					verifyIcon
-				});
+				await db
+					.insert(accountTable)
+					.values({
+						isPrimary: accounts.length ? void 0 : true,
+						name: accountDto.gameName,
+						playerId: player.id,
+						puuid: summonerDto.puuid,
+						rank: soloLeagueEntry?.rank ?? AccountRank.IV,
+						region: platform,
+						tagLine: accountDto.tagLine,
+						tier: soloLeagueEntry?.tier ?? AccountTier.IRON,
+						verifyIcon
+					});
 				revalidatePath(getPlayerUrl(player));
 				return void 0;
 			}}

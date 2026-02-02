@@ -21,10 +21,9 @@ export default async function draftPlayerAction(
 		return "You aren't the drafting captain!";
 	}
 
-	await db.insert(teamPlayerTable).values({
-		playerId: player.id,
-		teamId: team.id
-	});
+	await db
+		.insert(teamPlayerTable)
+		.values({ playerId: player.id, teamId: team.id });
 	revalidatePath("");
 	return void 0;
 }

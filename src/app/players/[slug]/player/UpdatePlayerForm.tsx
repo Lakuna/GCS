@@ -17,8 +17,10 @@ import slugify from "util/slugify";
  * Properties that can be passed to an update player form.
  * @public
  */
-export interface UpdatePlayerFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface UpdatePlayerFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The current player. */
 	player: typeof playerTable.$inferSelect;
 }

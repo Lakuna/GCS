@@ -95,6 +95,8 @@ export default async function Page(
 
 		if (
 			getMatchDateTime(firstMatchRow.value, season).valueOf() >
+			// TODO
+			// eslint-disable-next-line react-hooks/purity
 			Date.now() - 1000 * 60 * 60 * 12
 		) {
 			upcomingRound = round;
@@ -149,9 +151,9 @@ export default async function Page(
 			}
 
 			teamScore.victoryPoints +=
-				matchScore[0] < scoreToWin
-					? matchScore[0]
-					: matchScore[0] + (scoreToWin - 1 - matchScore[1]);
+				matchScore[0] < scoreToWin ?
+					matchScore[0]
+				:	matchScore[0] + (scoreToWin - 1 - matchScore[1]);
 		}
 	}
 
@@ -168,8 +170,9 @@ export default async function Page(
 
 	const session = await auth();
 	const isAdmin = session?.user?.isAdmin ?? false;
-	const isSignedUp = session?.user
-		? (
+	const isSignedUp =
+		session?.user ?
+			(
 				await db
 					.select()
 					.from(draftPlayerTable)
@@ -180,7 +183,7 @@ export default async function Page(
 						)
 					)
 			).length > 0
-		: false;
+		:	false;
 
 	return (
 		<div className={style["content"]}>
@@ -304,19 +307,15 @@ export const generateMetadata = async (
 		.from(seasonTable)
 		.where(eq(seasonTable.slug, slug))
 		.limit(1);
-	return season
-		? {
+	return season ?
+			{
 				description: `The schedule for Gauntlet Championship Series ${season.name}.`,
-				openGraph: {
-					url: getSeasonUrl(season)
-				},
+				openGraph: { url: getSeasonUrl(season) },
 				title: season.name
 			}
-		: {
+		:	{
 				description: "An unknown season of the Gauntlet Championship Series.",
-				openGraph: {
-					url: getSeasonUrl({ slug })
-				},
+				openGraph: { url: getSeasonUrl({ slug }) },
 				title: "Unknown Season"
 			};
 };

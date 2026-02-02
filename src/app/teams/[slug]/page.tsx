@@ -239,16 +239,13 @@ export const generateMetadata = async (
 		.from(teamTable)
 		.where(eq(teamTable.slug, slug))
 		.limit(1);
-	return team
-		? {
+	return team ?
+			{
 				description: `Gauntlet Championship Series team "${team.name}."`,
-				openGraph: {
-					images: team.logoUrl,
-					url: getTeamUrl(team)
-				},
+				openGraph: { images: team.logoUrl, url: getTeamUrl(team) },
 				title: team.name
 			}
-		: {
+		:	{
 				description: "An unknown team in the Gauntlet Championship Series.",
 				openGraph: { url: getTeamUrl({ slug }) },
 				title: "Unknown Team"

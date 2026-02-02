@@ -14,8 +14,10 @@ import slugify from "util/slugify";
  * Properties that can be passed to an update season form.
  * @public
  */
-export interface UpdateSeasonFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface UpdateSeasonFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The current season. */
 	season: typeof seasonTable.$inferSelect;
 }

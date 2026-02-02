@@ -10,15 +10,17 @@ import { type Spec, SwaggerUIBundle } from "swagger-ui-dist";
  * Properties that can be passed to a Swagger UI container.
  * @public
  */
-export interface SwaggerProps
-	extends Omit<JSX.IntrinsicElements["div"], "children"> {
+export interface SwaggerProps extends Omit<
+	JSX.IntrinsicElements["div"],
+	"children"
+> {
 	/** The OpenAPI spec */
 	spec: Spec;
 }
 
 /**
  * A Swagger UI container.
- * @params props - The container's properties.
+ * @param props - The container's properties.
  * @returns The Swagger UI container.
  * @public
  */

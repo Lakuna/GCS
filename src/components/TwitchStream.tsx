@@ -7,8 +7,10 @@ import style from "./styles/youtube-video.module.scss";
  * @see {@link https://dev.twitch.tv/docs/embed/video-and-clips/ | Embedding Video and Clips}
  * @public
  */
-export interface TwitchStreamProps
-	extends Omit<JSX.IntrinsicElements["iframe"], "src" | "allow" | "children"> {
+export interface TwitchStreamProps extends Omit<
+	JSX.IntrinsicElements["iframe"],
+	"src" | "allow" | "children"
+> {
 	/** Change `allow` functionality to support a list of strings. */
 	allow?: string[] | undefined;
 

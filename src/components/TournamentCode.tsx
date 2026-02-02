@@ -9,8 +9,10 @@ import style from "./styles/tournament-code.module.scss";
  * Properties that can be passed to a tournament code display.
  * @public
  */
-export interface TournamentCodeProps
-	extends Omit<JSX.IntrinsicElements["div"], "children"> {
+export interface TournamentCodeProps extends Omit<
+	JSX.IntrinsicElements["div"],
+	"children"
+> {
 	// The tournament code represented by the display.
 	tournamentCode: string;
 }

@@ -165,11 +165,11 @@ export default function Refresher({
 							(teamsByDraftOrder.length * 2);
 						const nextTeam =
 							teamsByDraftOrder[
-								nextIndex < teamsByDraftOrder.length
-									? nextIndex
-									: teamsByDraftOrder.length -
-										1 -
-										(nextIndex - teamsByDraftOrder.length)
+								nextIndex < teamsByDraftOrder.length ?
+									nextIndex
+								:	teamsByDraftOrder.length -
+									1 -
+									(nextIndex - teamsByDraftOrder.length)
 							];
 
 						setCanDraft(nextTeam?.value.id === innerTeam.value.id);
@@ -178,9 +178,9 @@ export default function Refresher({
 					setLastUpdate(new Date());
 				})
 				.catch((error: unknown) => {
-					throw error instanceof Error
-						? error
-						: new Error("Error refreshing draft page.");
+					throw error instanceof Error ? error : (
+							new Error("Error refreshing draft page.")
+						);
 				});
 		};
 
@@ -198,7 +198,7 @@ export default function Refresher({
 			<div className={style["team"]}>
 				<header>
 					<h2>
-						{team ? (
+						{team ?
 							<>
 								<Link href={getTeamUrl(team.value)}>{team.value.name}</Link>
 								{` - ${team.children
@@ -211,9 +211,7 @@ export default function Refresher({
 									)
 									.toString()} PV`}
 							</>
-						) : (
-							"Not Drafted Yet"
-						)}
+						:	"Not Drafted Yet"}
 					</h2>
 				</header>
 				<ul>

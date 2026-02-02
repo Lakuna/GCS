@@ -17,7 +17,7 @@ import leftHierarchy from "util/leftHierarchy";
  */
 export interface GetGameParams {
 	/** The ID of the game. */
-	id: `${number}`;
+	id: string; // `${number}`;
 }
 
 /**
@@ -62,12 +62,13 @@ export const GET = async (
 	const { game, gameResult } = row;
 	const { matchId, tournamentCode } = game;
 	const teams = leftHierarchy(rows, "teamGameResult", "playerGameResult");
-	const bans = gameResult
-		? await db
+	const bans =
+		gameResult ?
+			await db
 				.select()
 				.from(teamGameResultBanTable)
 				.where(eq(teamGameResultBanTable.gameResultId, gameResult.id))
-		: [];
+		:	[];
 
 	return NextResponse.json({
 		duration: gameResult?.duration ?? null,

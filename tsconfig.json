@@ -5,6 +5,7 @@
 		"**/*.ts", // Next.js required.
 		"**/*.tsx", // Next.js required.
 		".next/types/**/*.ts", // Next.js required.
+		".next/dev/types/**/*.ts", // Next.js required.
 		"**/*"
 	],
 	"exclude": ["node_modules"],
@@ -14,7 +15,6 @@
 		"allowUnusedLabels": false,
 		"exactOptionalPropertyTypes": true,
 		"noFallthroughCasesInSwitch": true,
-		"noImplicitAny": true,
 		"noImplicitOverride": true,
 		"noImplicitReturns": true,
 		"noPropertyAccessFromIndexSignature": true,
@@ -47,7 +47,7 @@
 		// N/A
 
 		// Language and Environment
-		"jsx": "preserve", // Next.js required.
+		"jsx": "react-jsx", // Next.js required.
 		"lib": ["dom", "dom.iterable", "esnext"], // Next.js required.
 		"target": "esnext",
 

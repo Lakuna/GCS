@@ -12,8 +12,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to a forfeit form.
  * @public
  */
-export interface DeleteGameFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface DeleteGameFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The game to delete. */
 	game: typeof gameTable.$inferSelect;
 }

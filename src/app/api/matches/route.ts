@@ -10,11 +10,6 @@ import { matchTable } from "db/schema";
 export const GET = async (): Promise<NextResponse> =>
 	NextResponse.json(
 		(await db.select().from(matchTable)).map(
-			({ id, round, seasonId, timeSlot }) => ({
-				id,
-				round,
-				seasonId,
-				timeSlot
-			})
+			({ id, round, seasonId, timeSlot }) => ({ id, round, seasonId, timeSlot })
 		)
 	);

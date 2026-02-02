@@ -11,7 +11,7 @@ import leftHierarchy from "util/leftHierarchy";
  */
 export interface GetTeamParams {
 	/** The ID of the team. */
-	id: `${number}`;
+	id: string; // `${number}`;
 }
 
 /**

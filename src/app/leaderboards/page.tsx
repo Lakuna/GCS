@@ -8,7 +8,7 @@ import {
 	seasonTable
 } from "db/schema";
 import { desc, eq } from "drizzle-orm";
-import type { JSX } from "react";
+import { type JSX } from "react";
 import Link from "components/Link";
 import type { Metadata } from "next";
 import db from "db/db";
@@ -55,6 +55,8 @@ export default async function Page(): Promise<JSX.Element> {
 	const rows = rowsWithBans.filter(
 		(row) =>
 			row.player.bannedUntil === null ||
+			// TODO
+			// eslint-disable-next-line react-hooks/purity
 			new Date(row.player.bannedUntil).valueOf() < Date.now()
 	);
 	const resultsByPlayer = leftHierarchy(rows, "player", "playerGameResult");

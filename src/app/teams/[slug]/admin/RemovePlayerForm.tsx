@@ -12,8 +12,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to a remove player form.
  * @public
  */
-export interface RemovePlayerFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface RemovePlayerFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The team to add the player to. */
 	team: typeof teamTable.$inferSelect;
 

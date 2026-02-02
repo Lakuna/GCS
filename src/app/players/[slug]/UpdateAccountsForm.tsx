@@ -11,8 +11,10 @@ import updateAccount from "util/updateAccount";
  * Properties that can be passed to an update accounts form.
  * @public
  */
-export interface UpdateAccountsFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface UpdateAccountsFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The player to update the accounts of. */
 	player: typeof playerTable.$inferSelect;
 

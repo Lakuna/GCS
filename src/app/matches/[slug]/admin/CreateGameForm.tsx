@@ -12,8 +12,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to a create game form.
  * @public
  */
-export interface CreateGameFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface CreateGameFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The current match. */
 	match: typeof matchTable.$inferSelect;
 }

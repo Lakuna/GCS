@@ -32,12 +32,14 @@ export default function CreateSeasonForm(
 				}
 
 				const name = getFormField(form, "name", true);
-				await db.insert(seasonTable).values({
-					id: await makeTournament(name),
-					name,
-					slug: slugify(getFormField(form, "vanityUrlSlug", true)),
-					startDate: getFormField(form, "startDate")
-				});
+				await db
+					.insert(seasonTable)
+					.values({
+						id: await makeTournament(name),
+						name,
+						slug: slugify(getFormField(form, "vanityUrlSlug", true)),
+						startDate: getFormField(form, "startDate")
+					});
 				return void 0;
 			}}
 			{...props}

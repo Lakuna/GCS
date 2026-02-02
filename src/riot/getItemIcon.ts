@@ -10,7 +10,7 @@ export default async function getItemIcon(
 	id: number | `${number}`
 ): Promise<string | undefined> {
 	const version = await getDataDragonVersion();
-	return version
-		? `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${id.toString()}.png`
-		: void 0;
+	return version ?
+			`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${id.toString()}.png`
+		:	void 0;
 }

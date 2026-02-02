@@ -11,8 +11,10 @@ import style from "./round-header.module.scss";
  * Properties that can be passed to a round header.
  * @public
  */
-export interface RoundHeaderProps
-	extends Omit<JSX.IntrinsicElements["header"], "children" | "ref"> {
+export interface RoundHeaderProps extends Omit<
+	JSX.IntrinsicElements["header"],
+	"children" | "ref"
+> {
 	/** The round number. */
 	round: number;
 
@@ -59,21 +61,15 @@ export default function RoundHeader({
 			className={multiclass(style["round"], className)}
 			{...props}
 		>
-			{match ? (
+			{match ?
 				<h3>
 					<LocalDate
 						date={getMatchDateTime(match, season)}
-						options={{
-							day: "numeric",
-							month: "long",
-							weekday: "long"
-						}}
+						options={{ day: "numeric", month: "long", weekday: "long" }}
 					/>
 					{doShowRound && ` - Round ${round.toString()}`}
 				</h3>
-			) : (
-				<h3>{`Round ${round.toString()}`}</h3>
-			)}
+			:	<h3>{`Round ${round.toString()}`}</h3>}
 		</header>
 	);
 }

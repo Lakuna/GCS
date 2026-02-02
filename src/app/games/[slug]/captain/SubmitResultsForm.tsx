@@ -24,8 +24,10 @@ import saveGame from "util/saveGame";
  * Properties that can be passed to a submit results form.
  * @public
  */
-export interface SubmitResultsFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface SubmitResultsFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The game to submit results for. */
 	game: typeof gameTable.$inferSelect;
 

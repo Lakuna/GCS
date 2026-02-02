@@ -12,7 +12,7 @@ export default function getBackgroundImageUrl({
 }: Pick<typeof playerTable.$inferSelect, "bgChamp" | "bgSkin">):
 	| `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${string}_${string}.jpg`
 	| undefined {
-	return bgChamp && typeof bgSkin === "number"
-		? `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${bgChamp}_${bgSkin.toString()}.jpg`
-		: void 0;
+	return bgChamp && typeof bgSkin === "number" ?
+			`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${bgChamp}_${bgSkin.toString()}.jpg`
+		:	void 0;
 }

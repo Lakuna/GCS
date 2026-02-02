@@ -99,20 +99,16 @@ export const generateMetadata = async (
 		.from(seasonTable)
 		.where(eq(seasonTable.slug, slug))
 		.limit(1);
-	return season
-		? {
+	return season ?
+			{
 				description: `The players for Gauntlet Championship Series ${season.name}.`,
-				openGraph: {
-					url: `${getSeasonUrl(season)}/players`
-				},
+				openGraph: { url: `${getSeasonUrl(season)}/players` },
 				title: `${season.name} Players`
 			}
-		: {
+		:	{
 				description:
 					"The players for an unknown season of the Gauntlet Championship Series.",
-				openGraph: {
-					url: `${getSeasonUrl({ slug })}/players`
-				},
+				openGraph: { url: `${getSeasonUrl({ slug })}/players` },
 				title: "Unknown Season Players"
 			};
 };

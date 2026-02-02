@@ -6,8 +6,10 @@ import style from "./styles/youtube-video.module.scss";
  * Properties that can be passed to a YouTube video embed.
  * @public
  */
-export interface YoutubeVideoProps
-	extends Omit<JSX.IntrinsicElements["iframe"], "src" | "allow" | "children"> {
+export interface YoutubeVideoProps extends Omit<
+	JSX.IntrinsicElements["iframe"],
+	"src" | "allow" | "children"
+> {
 	/** The ID of the YouTube video to embed. */
 	id: string;
 

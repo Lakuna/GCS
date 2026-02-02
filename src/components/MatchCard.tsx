@@ -65,7 +65,7 @@ export default function MatchCard({
 			{...props}
 		>
 			<p>{match.format}</p>
-			{blueTeam ? (
+			{blueTeam ?
 				<>
 					<h3>{blueTeam.code}</h3>
 					<Image
@@ -77,18 +77,17 @@ export default function MatchCard({
 						style={{ border: `1px solid #${blueTeam.color}` }}
 					/>
 				</>
-			) : (
-				<>
+			:	<>
 					<h3>{"CODE"}</h3>
 					<Image alt="Logo" src={placeholder} />
 				</>
-			)}
+			}
 			<h3 className={style["score"]}>
-				{teamGameResults?.length
-					? `${teamGameResults.filter(({ isWinner, teamId }) => isWinner && teamId === blueTeam?.id).length.toString()}-${teamGameResults.filter(({ isWinner, teamId }) => isWinner && teamId === redTeam?.id).length.toString()}`
-					: "VS"}
+				{teamGameResults?.length ?
+					`${teamGameResults.filter(({ isWinner, teamId }) => isWinner && teamId === blueTeam?.id).length.toString()}-${teamGameResults.filter(({ isWinner, teamId }) => isWinner && teamId === redTeam?.id).length.toString()}`
+				:	"VS"}
 			</h3>
-			{redTeam ? (
+			{redTeam ?
 				<>
 					<Image
 						alt="Logo"
@@ -100,12 +99,11 @@ export default function MatchCard({
 					/>
 					<h3>{redTeam.code}</h3>
 				</>
-			) : (
-				<>
+			:	<>
 					<Image alt="Logo" src={placeholder} />
 					<h3>{"CODE"}</h3>
 				</>
-			)}
+			}
 			{dateTime && (
 				<p>
 					<LocalDate

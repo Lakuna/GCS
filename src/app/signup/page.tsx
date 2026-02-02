@@ -50,6 +50,8 @@ export default async function Page(): Promise<JSX.Element> {
 	const player = session.user;
 	if (
 		player.bannedUntil &&
+		// TODO
+		// eslint-disable-next-line react-hooks/purity
 		new Date(player.bannedUntil).valueOf() > Date.now()
 	) {
 		return (
@@ -248,13 +250,13 @@ export const generateMetadata = async (): Promise<Metadata> => {
 		.orderBy(desc(seasonTable.startDate))
 		.limit(1);
 
-	return season
-		? {
+	return season ?
+			{
 				description: `Sign up for ${season.name} of the Gauntlet Championship Series.`,
 				openGraph: { url: "/signup" },
 				title: `Sign Up for ${season.name}`
 			}
-		: {
+		:	{
 				description:
 					"Sign up for the next season of the Gauntlet Championship Series.",
 				openGraph: { url: "/signup" },

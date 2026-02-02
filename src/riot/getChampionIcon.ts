@@ -10,7 +10,7 @@ export default async function getChampionIcon(
 	id: string
 ): Promise<string | undefined> {
 	const version = await getDataDragonVersion();
-	return version
-		? `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${id}.png`
-		: void 0;
+	return version ?
+			`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${id}.png`
+		:	void 0;
 }

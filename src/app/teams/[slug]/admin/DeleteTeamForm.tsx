@@ -12,8 +12,10 @@ import { teamTable } from "db/schema";
  * Properties that can be passed to a delete team form.
  * @public
  */
-export interface DeleteTeamFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface DeleteTeamFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The current team. */
 	team: typeof teamTable.$inferSelect;
 }

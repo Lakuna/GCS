@@ -12,8 +12,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to a forfeit form.
  * @public
  */
-export interface DeleteMatchFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface DeleteMatchFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The match to delete. */
 	match: typeof matchTable.$inferSelect;
 }

@@ -10,8 +10,10 @@ import { playerTable } from "db/schema";
  * Properties that can be passed to a ban player form.
  * @public
  */
-export interface BanPlayerFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface BanPlayerFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The player to ban. */
 	player: typeof playerTable.$inferSelect;
 }

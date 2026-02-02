@@ -12,8 +12,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to a remove account form.
  * @public
  */
-export interface RemoveAccountFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface RemoveAccountFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The player to remove the account from. */
 	player: typeof playerTable.$inferSelect;
 

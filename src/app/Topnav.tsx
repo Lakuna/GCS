@@ -48,7 +48,7 @@ export default async function Topnav({
 						<span>{"Leaderboards"}</span>
 					</Link>
 				</li>
-				{session?.user ? (
+				{session?.user ?
 					<>
 						<li className={style["right"]}>
 							<Link href={getPlayerUrl(session.user)}>
@@ -73,8 +73,7 @@ export default async function Topnav({
 							</Form>
 						</li>
 					</>
-				) : (
-					<li className={style["right"]}>
+				:	<li className={style["right"]}>
 						<Form
 							action={async () => {
 								"use server";
@@ -84,7 +83,7 @@ export default async function Topnav({
 							<Submit value="Sign In" />
 						</Form>
 					</li>
-				)}
+				}
 			</ul>
 		</nav>
 	);

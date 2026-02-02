@@ -101,12 +101,7 @@ export default async function Page(
 				throw new Error("Something impossible happened.");
 			}
 
-			return {
-				game,
-				gameResult,
-				playerGameResult,
-				teamGameResult
-			};
+			return { game, gameResult, playerGameResult, teamGameResult };
 		});
 
 	// Get session user data.
@@ -240,8 +235,8 @@ export const generateMetadata = async (
 		rows.find(({ id }) => id === decoded) ??
 		rows.find(({ slug }) => slug === decoded);
 
-	return player
-		? {
+	return player ?
+			{
 				description: `Gauntlet Championship Series player "${player.displayName ?? player.name}."`,
 				openGraph: {
 					images: getBackgroundImageUrl(player),
@@ -249,7 +244,7 @@ export const generateMetadata = async (
 				},
 				title: player.displayName ?? player.name
 			}
-		: {
+		:	{
 				description: "An unknown player in the Gauntlet Championship Series.",
 				openGraph: { url: getPlayerUrl({ id: decoded, slug: decoded }) },
 				title: "Unknown Player"

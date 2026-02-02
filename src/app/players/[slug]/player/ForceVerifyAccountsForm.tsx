@@ -11,8 +11,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to a force verify accounts form.
  * @public
  */
-export interface ForceVerifyAccountsFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface ForceVerifyAccountsFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The player to verify the accounts of. */
 	player: typeof playerTable.$inferSelect;
 }

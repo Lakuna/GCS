@@ -80,13 +80,15 @@ export default async function GameCard({
 	}
 
 	const backgroundColor =
-		teamGameResults.length > 0
-			? teamGameResults.some(
+		teamGameResults.length > 0 ?
+			(
+				teamGameResults.some(
 					({ isWinner, team }) => isWinner && team === (pov ?? 100)
 				)
-				? "#00008d"
-				: "#550000"
-			: void 0;
+			) ?
+				"#00008d"
+			:	"#550000"
+		:	void 0;
 
 	// Forfeited game.
 	if (playerGameResults.length === 0) {
@@ -126,14 +128,75 @@ export default async function GameCard({
 				id === accounts?.find(({ puuid }) => puuid === result.puuid)?.playerId
 		);
 
-		return extended ? (
-			<a
-				className={multiclass(className, style["extended-single"])}
-				href={getGameUrl(game)}
-				style={{ backgroundColor }}
-				{...props}
-			>
-				<header>
+		return extended ?
+				<a
+					className={multiclass(className, style["extended-single"])}
+					href={getGameUrl(game)}
+					style={{ backgroundColor }}
+					{...props}
+				>
+					<header>
+						{champion && championIcon && (
+							<Image
+								alt={`${champion.name} icon.`}
+								src={championIcon}
+								width={128}
+								height={128}
+								className={style["champion"]}
+							/>
+						)}
+						<div>
+							{player ?
+								<h3>{player.displayName ?? player.name}</h3>
+							:	<h3>{result.name}</h3>}
+							<p>{`${result.kills.toString()}/${result.deaths.toString()}/${result.assists.toString()}`}</p>
+							<p>{`Damage: ${result.champDmg.toLocaleString()}`}</p>
+							<p>{`Level: ${result.level.toString()}`}</p>
+							<p>{`Position: ${result.position}`}</p>
+						</div>
+					</header>
+					<div className={style["items"]}>
+						{[
+							result.item0,
+							result.item1,
+							result.item2,
+							result.item6,
+							result.item3,
+							result.item4,
+							result.item5
+						].map(async (item, i) => {
+							const src = item && (await getItemIcon(item));
+							return src ?
+									<Image
+										key={i}
+										alt="Item icon."
+										src={src}
+										width={64}
+										height={64}
+									/>
+								:	<span />; // Grid placeholder.
+						})}
+					</div>
+					<div className={style["details"]}>
+						<p>{`CS: ${(result.laneCs + result.neutralCs).toLocaleString()}`}</p>
+						<ul>
+							<li>{`Lane: ${result.laneCs.toLocaleString()}`}</li>
+							<li>{`Ally jungle: ${result.allyJgCs.toLocaleString()}`}</li>
+							<li>{`Enemy jungle: ${result.enemyJgCs.toLocaleString()}`}</li>
+							<li>{`Other neutral: ${(result.neutralCs - result.allyJgCs - result.enemyJgCs).toLocaleString()}`}</li>
+						</ul>
+						<p>{`Ward kills: ${result.wardCs.toLocaleString()}`}</p>
+						<p>{`Tower damage: ${result.towerDmg.toLocaleString()}`}</p>
+						<p>{`Objective steals: ${result.objectivesStolen.toLocaleString()}`}</p>
+						<p>{`Pentakills: ${result.pentakills.toLocaleString()}`}</p>
+					</div>
+				</a>
+			:	<a
+					className={multiclass(className, style["single"])}
+					href={getGameUrl(game)}
+					style={{ backgroundColor }}
+					{...props}
+				>
 					{champion && championIcon && (
 						<Image
 							alt={`${champion.name} icon.`}
@@ -144,18 +207,14 @@ export default async function GameCard({
 						/>
 					)}
 					<div>
-						{player ? (
+						{player ?
 							<h3>{player.displayName ?? player.name}</h3>
-						) : (
-							<h3>{result.name}</h3>
-						)}
+						:	<h3>{result.name}</h3>}
 						<p>{`${result.kills.toString()}/${result.deaths.toString()}/${result.assists.toString()}`}</p>
 						<p>{`Damage: ${result.champDmg.toLocaleString()}`}</p>
 						<p>{`Level: ${result.level.toString()}`}</p>
 						<p>{`Position: ${result.position}`}</p>
 					</div>
-				</header>
-				<div className={style["items"]}>
 					{[
 						result.item0,
 						result.item1,
@@ -166,78 +225,17 @@ export default async function GameCard({
 						result.item5
 					].map(async (item, i) => {
 						const src = item && (await getItemIcon(item));
-						return src ? (
-							<Image
-								key={i}
-								alt="Item icon."
-								src={src}
-								width={64}
-								height={64}
-							/>
-						) : (
-							<span /> // Grid placeholder.
-						);
+						return src ?
+								<Image
+									key={i}
+									alt="Item icon."
+									src={src}
+									width={64}
+									height={64}
+								/>
+							:	<span />; // Grid placeholder.
 					})}
-				</div>
-				<div className={style["details"]}>
-					<p>{`CS: ${(result.laneCs + result.neutralCs).toLocaleString()}`}</p>
-					<ul>
-						<li>{`Lane: ${result.laneCs.toLocaleString()}`}</li>
-						<li>{`Ally jungle: ${result.allyJgCs.toLocaleString()}`}</li>
-						<li>{`Enemy jungle: ${result.enemyJgCs.toLocaleString()}`}</li>
-						<li>{`Other neutral: ${(result.neutralCs - result.allyJgCs - result.enemyJgCs).toLocaleString()}`}</li>
-					</ul>
-					<p>{`Ward kills: ${result.wardCs.toLocaleString()}`}</p>
-					<p>{`Tower damage: ${result.towerDmg.toLocaleString()}`}</p>
-					<p>{`Objective steals: ${result.objectivesStolen.toLocaleString()}`}</p>
-					<p>{`Pentakills: ${result.pentakills.toLocaleString()}`}</p>
-				</div>
-			</a>
-		) : (
-			<a
-				className={multiclass(className, style["single"])}
-				href={getGameUrl(game)}
-				style={{ backgroundColor }}
-				{...props}
-			>
-				{champion && championIcon && (
-					<Image
-						alt={`${champion.name} icon.`}
-						src={championIcon}
-						width={128}
-						height={128}
-						className={style["champion"]}
-					/>
-				)}
-				<div>
-					{player ? (
-						<h3>{player.displayName ?? player.name}</h3>
-					) : (
-						<h3>{result.name}</h3>
-					)}
-					<p>{`${result.kills.toString()}/${result.deaths.toString()}/${result.assists.toString()}`}</p>
-					<p>{`Damage: ${result.champDmg.toLocaleString()}`}</p>
-					<p>{`Level: ${result.level.toString()}`}</p>
-					<p>{`Position: ${result.position}`}</p>
-				</div>
-				{[
-					result.item0,
-					result.item1,
-					result.item2,
-					result.item6,
-					result.item3,
-					result.item4,
-					result.item5
-				].map(async (item, i) => {
-					const src = item && (await getItemIcon(item));
-					return src ? (
-						<Image key={i} alt="Item icon." src={src} width={64} height={64} />
-					) : (
-						<span /> // Grid placeholder.
-					);
-				})}
-			</a>
-		);
+				</a>;
 	}
 
 	// Normal game result.
@@ -251,9 +249,9 @@ export default async function GameCard({
 			{playerGameResults
 				.sort(
 					(a, b) =>
-						(typeof pov === "number"
-							? (a.team === pov ? 100 : 200) - (b.team === pov ? 100 : 200)
-							: a.team - b.team) || sortPlayersStandard(a, b)
+						(typeof pov === "number" ?
+							(a.team === pov ? 100 : 200) - (b.team === pov ? 100 : 200)
+						:	a.team - b.team) || sortPlayersStandard(a, b)
 				)
 				.map(async (result) => {
 					const champion = championsByKey.get(result.champ);
@@ -275,11 +273,9 @@ export default async function GameCard({
 								/>
 							)}
 							<h3>{`${result.kills.toString()}/${result.deaths.toString()}/${result.assists.toString()}`}</h3>
-							{player ? (
+							{player ?
 								<p>{player.displayName ?? player.name}</p>
-							) : (
-								<p>{result.name}</p>
-							)}
+							:	<p>{result.name}</p>}
 						</div>
 					);
 				})}

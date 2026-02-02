@@ -6,8 +6,10 @@ import type { gameTable } from "db/schema";
  * Properties that can be passed to a captain panel.
  * @public
  */
-export interface AdminPanelProps
-	extends Omit<JSX.IntrinsicElements["div"], "children"> {
+export interface AdminPanelProps extends Omit<
+	JSX.IntrinsicElements["div"],
+	"children"
+> {
 	/** The game. */
 	game: typeof gameTable.$inferSelect;
 }

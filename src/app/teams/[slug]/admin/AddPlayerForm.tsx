@@ -12,8 +12,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to an add player form.
  * @public
  */
-export interface AddPlayerFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface AddPlayerFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The team to add the player to. */
 	team: typeof teamTable.$inferSelect;
 
@@ -80,11 +82,9 @@ export default function AddPlayerForm({
 				}
 
 				// Add the player to the team.
-				await db.insert(teamPlayerTable).values({
-					isCaptain,
-					playerId,
-					teamId: team.id
-				});
+				await db
+					.insert(teamPlayerTable)
+					.values({ isCaptain, playerId, teamId: team.id });
 				revalidatePath(getTeamUrl(team));
 			}}
 			{...props}

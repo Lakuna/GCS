@@ -9,8 +9,10 @@ import type Spell from "./Spell";
  * @see {@link https://developer.riotgames.com/docs/lol#data-dragon_champions | Champions}
  * @public
  */
-export default interface FullChampionData
-	extends Omit<ChampionData, "version"> {
+export default interface FullChampionData extends Omit<
+	ChampionData,
+	"version"
+> {
 	/** The champion's skins. */
 	skins: ChampionSkin[];
 

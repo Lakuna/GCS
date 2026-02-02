@@ -17,8 +17,10 @@ import ugg from "util/ugg";
  * Properties that can be passed to a draft player form.
  * @public
  */
-export interface DraftPlayerFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface DraftPlayerFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The draft player. */
 	draftPlayer: typeof draftPlayerTable.$inferSelect;
 

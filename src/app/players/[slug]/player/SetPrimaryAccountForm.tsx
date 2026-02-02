@@ -12,8 +12,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to a set primary account form.
  * @public
  */
-export interface SetPrimaryAccountFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface SetPrimaryAccountFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The player to set the primary account of. */
 	player: typeof playerTable.$inferSelect;
 

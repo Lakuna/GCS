@@ -10,8 +10,10 @@ import UpdateSkinForm from "./player/UpdateSkinForm";
  * Properties that can be passed to a player panel.
  * @public
  */
-export interface PlayerPanelProps
-	extends Omit<JSX.IntrinsicElements["div"], "children"> {
+export interface PlayerPanelProps extends Omit<
+	JSX.IntrinsicElements["div"],
+	"children"
+> {
 	/** The player to modify. */
 	player: typeof playerTable.$inferSelect;
 

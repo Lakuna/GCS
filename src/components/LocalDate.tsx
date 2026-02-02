@@ -6,8 +6,10 @@ import { type JSX, Suspense, useEffect, useState } from "react";
  * Properties that can be passed to a date display.
  * @public
  */
-export interface LocalDateProps
-	extends Omit<JSX.IntrinsicElements["time"], "children" | "dateTime"> {
+export interface LocalDateProps extends Omit<
+	JSX.IntrinsicElements["time"],
+	"children" | "dateTime"
+> {
 	// The date represented by the display.
 	date: Date;
 
@@ -34,6 +36,8 @@ export default function LocalDate({
 }: LocalDateProps): JSX.Element {
 	const [hydrated, setHydrated] = useState(false);
 	useEffect(() => {
+		// TODO
+		// eslint-disable-next-line react-hooks/set-state-in-effect
 		setHydrated(true);
 	}, []);
 

@@ -12,8 +12,10 @@ import { revalidatePath } from "next/cache";
  * Properties that can be passed to a set captain form.
  * @public
  */
-export interface SetCaptainFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface SetCaptainFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The team to set the captain of. */
 	team: typeof teamTable.$inferSelect;
 

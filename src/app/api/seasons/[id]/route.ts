@@ -16,7 +16,7 @@ import leftHierarchy from "util/leftHierarchy";
  */
 export interface GetSeasonParams {
 	/** The ID of the season. */
-	id: `${number}`;
+	id: string; // `${number}`;
 }
 
 /**

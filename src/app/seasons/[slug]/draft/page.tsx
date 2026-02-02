@@ -39,20 +39,16 @@ export const generateMetadata = async (
 		.from(seasonTable)
 		.where(eq(seasonTable.slug, slug))
 		.limit(1);
-	return season
-		? {
+	return season ?
+			{
 				description: `The draft for Gauntlet Championship Series ${season.name}.`,
-				openGraph: {
-					url: `${getSeasonUrl(season)}/draft`
-				},
+				openGraph: { url: `${getSeasonUrl(season)}/draft` },
 				title: `${season.name} Draft`
 			}
-		: {
+		:	{
 				description:
 					"The draft for an unknown season of the Gauntlet Championship Series.",
-				openGraph: {
-					url: `${getSeasonUrl({ slug })}/draft`
-				},
+				openGraph: { url: `${getSeasonUrl({ slug })}/draft` },
 				title: "Unknown Season Draft"
 			};
 };

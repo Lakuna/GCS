@@ -11,7 +11,7 @@ import leftHierarchy from "util/leftHierarchy";
  */
 export interface GetMatchParams {
 	/** The ID of the match. */
-	id: `${number}`;
+	id: string; // `${number}`;
 }
 
 /**

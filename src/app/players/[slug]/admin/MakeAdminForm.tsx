@@ -9,8 +9,10 @@ import { playerTable } from "db/schema";
  * Properties that can be passed to a make administrator form.
  * @public
  */
-export interface MakeAdminFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface MakeAdminFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The player to make an administrator. */
 	player: typeof playerTable.$inferSelect;
 }

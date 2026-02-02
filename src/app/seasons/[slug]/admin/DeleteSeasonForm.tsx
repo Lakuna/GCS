@@ -12,8 +12,10 @@ import { seasonTable } from "db/schema";
  * Properties that can be passed to a delete season form.
  * @public
  */
-export interface DeleteSeasonFormProps
-	extends Omit<FormProps, "action" | "children"> {
+export interface DeleteSeasonFormProps extends Omit<
+	FormProps,
+	"action" | "children"
+> {
 	/** The current season. */
 	season: typeof seasonTable.$inferSelect;
 }

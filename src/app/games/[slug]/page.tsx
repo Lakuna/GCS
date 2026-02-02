@@ -59,8 +59,9 @@ export default async function Page(
 
 	const { game, match, season } = gameRow;
 
-	const teams = match
-		? await db
+	const teams =
+		match ?
+			await db
 				.select()
 				.from(teamTable)
 				.where(
@@ -69,7 +70,7 @@ export default async function Page(
 						or(eq(teamTable.id, match.redTeamId))
 					)
 				)
-		: [];
+		:	[];
 	const matchBlueTeam = teams.find(({ id }) => id === match?.blueTeamId);
 	const matchRedTeam = teams.find(({ id }) => id === match?.redTeamId);
 
@@ -95,20 +96,20 @@ export default async function Page(
 			).length > 0);
 
 	const accountRows =
-		matchBlueTeam && matchRedTeam
-			? await db
-					.select()
-					.from(teamTable)
-					.innerJoin(teamPlayerTable, eq(teamTable.id, teamPlayerTable.teamId))
-					.innerJoin(playerTable, eq(teamPlayerTable.playerId, playerTable.id))
-					.innerJoin(accountTable, eq(playerTable.id, accountTable.playerId))
-					.where(
-						or(
-							eq(teamTable.id, matchBlueTeam.id),
-							eq(teamTable.id, matchRedTeam.id)
-						)
+		matchBlueTeam && matchRedTeam ?
+			await db
+				.select()
+				.from(teamTable)
+				.innerJoin(teamPlayerTable, eq(teamTable.id, teamPlayerTable.teamId))
+				.innerJoin(playerTable, eq(teamPlayerTable.playerId, playerTable.id))
+				.innerJoin(accountTable, eq(playerTable.id, accountTable.playerId))
+				.where(
+					or(
+						eq(teamTable.id, matchBlueTeam.id),
+						eq(teamTable.id, matchRedTeam.id)
 					)
-			: [];
+				)
+		:	[];
 	const allPlayers = accountRows.map(({ player }) => player);
 	const allAccounts = accountRows.map(({ account }) => account);
 
@@ -134,7 +135,7 @@ export default async function Page(
 			.map(({ account }) => account);
 
 		captainPanel =
-			session.user.isAdmin || isBlueCaptain || isRedCaptain ? (
+			session.user.isAdmin || isBlueCaptain || isRedCaptain ?
 				<CaptainPanel
 					className={style["panel"]}
 					game={game}
@@ -148,9 +149,7 @@ export default async function Page(
 					redAccounts={redAccounts}
 					overwriteEnabled={session.user.isAdmin}
 				/>
-			) : (
-				void 0
-			);
+			:	void 0;
 	}
 
 	const [gameResult] = leftHierarchy(
