@@ -7,7 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "eslint src",
-		"beautify": "prettier . --write",
+		"beautify": "eslint src --fix",
 		"drizzlePush": "drizzle-kit push"
 	},
 	"dependencies": {
