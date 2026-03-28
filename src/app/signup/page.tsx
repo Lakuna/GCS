@@ -119,7 +119,7 @@ export default async function Page(): Promise<JSX.Element> {
 					<h1>{"Sign Up"}</h1>
 					<p>
 						{`You must be a member of the `}
-						<Link href="https://discord.gg/gcsleague">
+						<Link href="https://discord.gg/6q83ZDbXMP">
 							{"Gauntlet Championship Series Discord server"}
 						</Link>
 						{" to register."}
