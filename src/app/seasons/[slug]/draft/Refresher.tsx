@@ -80,6 +80,7 @@ export default function Refresher({
 		>[]
 	>([]);
 	const [canDraft, setCanDraft] = useState(false);
+	const [isDraftStarted, setIsDraftStarted] = useState(false);
 	const [lastUpdate, setLastUpdate] = useState(new Date());
 
 	// Update state periodically.
@@ -95,6 +96,7 @@ export default function Refresher({
 
 					// Organize season, team, and drafted player data.
 					const { season } = first;
+					setIsDraftStarted(season.draftStartedAt !== null);
 					const teams = leftHierarchy(
 						seasonRows,
 						"team",
@@ -138,6 +140,7 @@ export default function Refresher({
 
 					// Determine whether the viewer is the next captain in line to draft a player.
 					if (
+						season.draftStartedAt === null ||
 						!session?.user ||
 						!innerTeam ||
 						innerTeam.children.length >= TEAM_SIZE ||
@@ -211,6 +214,13 @@ export default function Refresher({
 			<div className={style["draft"]}>
 				<header>
 					<h1>{"Draft"}</h1>
+					{!isDraftStarted && (
+						<p>
+							{
+								"Drafting has not started yet. Waiting for an admin to start the draft."
+							}
+						</p>
+					)}
 				</header>
 				<div>
 					{[

@@ -8,7 +8,7 @@ export const TIME_SLOT_DURATION = 2;
  * The number of players on a team.
  * @public
  */
-export const TEAM_SIZE = 8;
+export const TEAM_SIZE = 5;
 
 /**
  * The ID of GCS season one.

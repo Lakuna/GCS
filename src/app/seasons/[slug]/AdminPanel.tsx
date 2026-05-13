@@ -5,6 +5,7 @@ import DeleteSeasonForm from "./admin/DeleteSeasonForm";
 import GenerateRegularSeasonForm from "./admin/GenerateRegularSeasonForm";
 import { type JSX } from "react";
 import Link from "components/Link";
+import StartDraftForm from "./admin/StartDraftForm";
 import UpdateSeasonForm from "./admin/UpdateSeasonForm";
 import getSeasonUrl from "util/getSeasonUrl";
 
@@ -43,6 +44,7 @@ export default function AdminPanel({
 				{"View players and assign point values."}
 			</Link>
 			<UpdateSeasonForm season={season} />
+			<StartDraftForm season={season} />
 			<CreateTeamForm season={season} />
 			<CreateMatchForm season={season} teams={teams} />
 			<GenerateRegularSeasonForm season={season} teams={teams} />
