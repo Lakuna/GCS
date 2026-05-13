@@ -260,6 +260,9 @@ export const tournamentProviderTable = pgTable("tournamentProvider", {
  * @public
  */
 export const seasonTable = pgTable("season", {
+	// The date and time at which admins opened the player draft. Null until drafting is allowed.
+	draftStartedAt: timestamp(),
+
 	// The Riot Games tournament ID. Returned by the Riot Games tournament API.
 	id: integer().primaryKey(),
 

@@ -4,6 +4,7 @@ import { and, eq, isNotNull, isNull } from "drizzle-orm";
 import {
 	draftPlayerTable,
 	playerTable,
+	seasonTable,
 	teamPlayerTable,
 	teamTable
 } from "db/schema";
@@ -37,6 +38,15 @@ export default async function draftPlayerAction(
 		.limit(1);
 	if (!draftingTeam) {
 		return "That team doesn't exist.";
+	}
+
+	const [season] = await db
+		.select()
+		.from(seasonTable)
+		.where(eq(seasonTable.id, draftingTeam.seasonId))
+		.limit(1);
+	if (!season?.draftStartedAt) {
+		return "The draft has not started yet.";
 	}
 
 	const seasonTeamPlayersRows = await db
