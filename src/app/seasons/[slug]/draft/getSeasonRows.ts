@@ -8,8 +8,8 @@ import {
 	teamPlayerTable,
 	teamTable
 } from "db/schema";
+import { and, eq } from "drizzle-orm";
 import db from "db/db";
-import { eq } from "drizzle-orm";
 
 /**
  * Get season information.
@@ -24,7 +24,13 @@ export default async function getSeasonRows(slug: string) {
 		.leftJoin(teamTable, eq(seasonTable.id, teamTable.seasonId))
 		.leftJoin(teamPlayerTable, eq(teamTable.id, teamPlayerTable.teamId))
 		.leftJoin(playerTable, eq(teamPlayerTable.playerId, playerTable.id))
-		.leftJoin(draftPlayerTable, eq(playerTable.id, draftPlayerTable.playerId))
+		.leftJoin(
+			draftPlayerTable,
+			and(
+				eq(playerTable.id, draftPlayerTable.playerId),
+				eq(seasonTable.id, draftPlayerTable.seasonId)
+			)
+		)
 		.leftJoin(
 			accountTable,
 			eq(draftPlayerTable.playerId, accountTable.playerId)

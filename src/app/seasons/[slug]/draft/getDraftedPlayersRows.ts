@@ -1,6 +1,6 @@
 "use server";
 
-import { and, eq } from "drizzle-orm";
+import { and, eq, isNotNull } from "drizzle-orm";
 import {
 	draftPlayerTable,
 	playerTable,
@@ -10,9 +10,9 @@ import {
 import db from "db/db";
 
 /**
- * Get draftable player information.
+ * Get drafted player information.
  * @param seasonId - The season ID.
- * @returns Draftable player information.
+ * @returns Drafted player information.
  * @public
  */
 export default async function getDraftedPlayersRows(seasonId: number) {
@@ -25,7 +25,8 @@ export default async function getDraftedPlayersRows(seasonId: number) {
 		.where(
 			and(
 				eq(draftPlayerTable.seasonId, seasonId),
-				eq(teamTable.seasonId, seasonId)
+				eq(teamTable.seasonId, seasonId),
+				isNotNull(draftPlayerTable.draftedAt)
 			)
 		);
 }
