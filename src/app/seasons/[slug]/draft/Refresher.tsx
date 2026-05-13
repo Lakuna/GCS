@@ -18,6 +18,7 @@ import { TEAM_SIZE } from "util/const";
 import type { Tree } from "types/Tree";
 import getDraftablePlayersRows from "./getDraftablePlayersRows";
 import getDraftedPlayersRows from "./getDraftedPlayersRows";
+import getNextDraftTeam from "./getNextDraftTeam";
 import getSeasonRows from "./getSeasonRows";
 import getTeamUrl from "util/getTeamUrl";
 import leftHierarchy from "util/leftHierarchy";
@@ -79,6 +80,7 @@ export default function Refresher({
 		>[]
 	>([]);
 	const [canDraft, setCanDraft] = useState(false);
+	const [isDraftStarted, setIsDraftStarted] = useState(false);
 	const [lastUpdate, setLastUpdate] = useState(new Date());
 
 	// Update state periodically.
@@ -94,6 +96,7 @@ export default function Refresher({
 
 					// Organize season, team, and drafted player data.
 					const { season } = first;
+					setIsDraftStarted(season.draftStartedAt !== null);
 					const teams = leftHierarchy(
 						seasonRows,
 						"team",
@@ -137,6 +140,7 @@ export default function Refresher({
 
 					// Determine whether the viewer is the next captain in line to draft a player.
 					if (
+						season.draftStartedAt === null ||
 						!session?.user ||
 						!innerTeam ||
 						innerTeam.children.length >= TEAM_SIZE ||
@@ -147,32 +151,12 @@ export default function Refresher({
 					) {
 						setCanDraft(false);
 					} else {
-						const [mostRecentDraft] = innerDraftedPlayers.sort(
-							(
-								{ draftPlayer: { draftedAt: a } },
-								{ draftPlayer: { draftedAt: b } }
-							) => (b?.valueOf() ?? 0) - (a?.valueOf() ?? 0)
+						const nextTeam = getNextDraftTeam(
+							teams.map(({ value }) => value),
+							innerDraftedPlayers.length
 						);
-						const teamsByDraftOrder = teams.sort(
-							({ value: { draftOrder: a } }, { value: { draftOrder: b } }) =>
-								a - b
-						);
-						const nextIndex =
-							(teamsByDraftOrder.findIndex(
-								({ value: { id } }) => id === mostRecentDraft?.team.id
-							) +
-								1) %
-							(teamsByDraftOrder.length * 2);
-						const nextTeam =
-							teamsByDraftOrder[
-								nextIndex < teamsByDraftOrder.length ?
-									nextIndex
-								:	teamsByDraftOrder.length -
-									1 -
-									(nextIndex - teamsByDraftOrder.length)
-							];
 
-						setCanDraft(nextTeam?.value.id === innerTeam.value.id);
+						setCanDraft(nextTeam?.id === innerTeam.value.id);
 					}
 
 					setLastUpdate(new Date());
@@ -230,6 +214,13 @@ export default function Refresher({
 			<div className={style["draft"]}>
 				<header>
 					<h1>{"Draft"}</h1>
+					{!isDraftStarted && (
+						<p>
+							{
+								"Drafting has not started yet. Waiting for an admin to start the draft."
+							}
+						</p>
+					)}
 				</header>
 				<div>
 					{[
