@@ -54,12 +54,7 @@ export default function DraftPlayerForm({
 	const highestRankedAccount = getHighestRankedAccount(accounts);
 
 	return (
-		<Form
-			action={async () =>
-				await draftPlayerAction(enabled ?? false, player, team)
-			}
-			{...props}
-		>
+		<Form action={async () => await draftPlayerAction(player, team)} {...props}>
 			<header>
 				<h3>
 					<Link href={getPlayerUrl(player)}>
