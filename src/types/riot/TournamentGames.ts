@@ -18,8 +18,8 @@ export default interface TournamentGames {
 	/** The metadata associated with the game's tournament code. */
 	metaData: string;
 
-	/** The game's ID. */
-	gameId: number;
+	/** The game's ID. Typed as string because Riot game IDs exceed JavaScript's safe integer range. */
+	gameId: string;
 
 	/** The game's name. */
 	gameName: string;

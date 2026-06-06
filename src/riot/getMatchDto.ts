@@ -1,6 +1,7 @@
 import Cluster from "types/riot/Cluster";
 import type MatchDto from "types/riot/MatchDto";
 import getRiotApiBaseUrl from "./getRiotApiBaseUrl";
+import parseJsonSafe from "util/parseJsonSafe";
 import riotFetch from "./riotFetch";
 
 /**
@@ -17,11 +18,10 @@ export default async function getMatchDto(
 	cluster = Cluster.AMERICAS,
 	key: string | undefined = void 0
 ): Promise<MatchDto> {
-	return (await (
-		await riotFetch(
-			new URL(`/lol/match/v5/matches/${id}`, getRiotApiBaseUrl(cluster)).href,
-			void 0,
-			key
-		)
-	).json()) as MatchDto;
+	const response = await riotFetch(
+		new URL(`/lol/match/v5/matches/${id}`, getRiotApiBaseUrl(cluster)).href,
+		void 0,
+		key
+	);
+	return parseJsonSafe<MatchDto>(await response.text());
 }

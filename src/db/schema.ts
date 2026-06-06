@@ -474,8 +474,9 @@ export const gameResultTable = pgTable("gameResult", {
 	// The duration of the game in milliseconds.
 	duration: integer().notNull(),
 
-	// The game ID of the game in the Riot API.
-	id: bigint({ mode: "number" }).primaryKey(),
+	// The game ID of the game in the Riot API. Stored as varchar because Riot game IDs
+	// exceed JavaScript's safe integer range and must not be coerced to Number.
+	id: varchar({ length: 20 }).primaryKey(),
 
 	// The ID of the map that the game was played on.
 	map: integer().notNull(),
@@ -510,7 +511,7 @@ export const teamGameResultTable = pgTable(
 	"teamGameResult",
 	{
 		// The ID of the game result that these results correspond to.
-		gameResultId: bigint({ mode: "number" })
+		gameResultId: varchar({ length: 20 })
 			.references(() => gameResultTable.id, {
 				onDelete: "cascade",
 				onUpdate: "cascade"
@@ -550,7 +551,7 @@ export const teamGameResultBanTable = pgTable(
 		champ: integer().notNull(),
 
 		// The ID of the game result that these results correspond to.
-		gameResultId: bigint({ mode: "number" })
+		gameResultId: varchar({ length: 20 })
 			.references(() => gameResultTable.id, {
 				onDelete: "cascade",
 				onUpdate: "cascade"
@@ -595,7 +596,7 @@ export const playerGameResultTable = pgTable(
 		enemyJgCs: integer().notNull(),
 
 		// The ID of the game result that these results correspond to.
-		gameResultId: bigint({ mode: "number" })
+		gameResultId: varchar({ length: 20 })
 			.references(() => gameResultTable.id, {
 				onDelete: "cascade",
 				onUpdate: "cascade"
