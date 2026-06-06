@@ -30,7 +30,7 @@ export default function createForfeit(
 	]
 ] {
 	const now = Date.now();
-	const id = -now;
+	const id = (-now).toString();
 
 	return [
 		{

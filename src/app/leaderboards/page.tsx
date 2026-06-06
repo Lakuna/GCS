@@ -61,7 +61,7 @@ export default async function Page(): Promise<JSX.Element> {
 	);
 	const resultsByPlayer = leftHierarchy(rows, "player", "playerGameResult");
 	const killsPerTeam = rows.reduce((map, { playerGameResult }) => {
-		const key = `${playerGameResult.gameResultId.toString()}-${playerGameResult.team.toString()}`;
+		const key = `${playerGameResult.gameResultId}-${playerGameResult.team.toString()}`;
 		return map.set(key, (map.get(key) ?? 0) + playerGameResult.kills);
 	}, new Map<string, number>());
 
@@ -288,7 +288,7 @@ export default async function Page(): Promise<JSX.Element> {
 									(total, result) =>
 										total +
 										(killsPerTeam.get(
-											`${result.gameResultId.toString()}-${result.team.toString()}`
+											`${result.gameResultId}-${result.team.toString()}`
 										) ?? 0),
 									0
 								),

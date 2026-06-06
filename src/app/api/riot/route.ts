@@ -16,6 +16,7 @@ import getFormatGameCount from "util/getFormatGameCount";
 import getPlatformForRegion from "util/getPlatformForRegion";
 import leftHierarchy from "util/leftHierarchy";
 import makeTournamentCodes from "riot/makeTournamentCodes";
+import parseJsonSafe from "util/parseJsonSafe";
 import saveGame from "util/saveGame";
 
 /**
@@ -23,7 +24,7 @@ import saveGame from "util/saveGame";
  * @public
  */
 export const POST = async (request: NextRequest): Promise<NextResponse> => {
-	const games = (await request.json()) as TournamentGames[];
+	const games = parseJsonSafe(await request.text()) as TournamentGames[];
 	if (games.length > 1) {
 		return new NextResponse(
 			"More than one game was returned. Did you use the same tournament code twice?",

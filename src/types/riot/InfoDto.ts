@@ -20,8 +20,8 @@ export default interface InfoDto {
 	/** The Unix timestamp at which the game ended on the game server. Can occasionally be significantly later than when the match actually ends, so it is better to determine the timestamp of the end of the match by adding the `gameDuration` to the `gameStartTimestamp`. Added on patch 11.20. */
 	gameEndTimestamp?: number;
 
-	/** The game's ID. */
-	gameId: number;
+	/** The game's ID. Typed as string because Riot game IDs exceed JavaScript's safe integer range. */
+	gameId: string;
 
 	/** The game's mode. */
 	gameMode: string;

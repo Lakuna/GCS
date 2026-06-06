@@ -8,8 +8,8 @@ import Platform from "types/riot/Platform";
  * @public
  */
 export default function makeMatchId(
-	gameId: number | `${number}`,
+	gameId: string,
 	platform: Platform = Platform.NA1
-): `${Platform}_${number}` {
-	return `${platform}_${gameId.toString() as `${number}`}`;
+): `${Platform}_${string}` {
+	return `${platform}_${gameId}`;
 }

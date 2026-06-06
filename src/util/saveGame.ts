@@ -23,7 +23,7 @@ import makeMatchId from "./makeMatchId";
  * @public
  */
 export default async function saveGame(
-	id: number | `${number}`,
+	id: string,
 	puuids?: Map<number, string[]>,
 	game?: Pick<typeof gameTable.$inferSelect, "tournamentCode" | "id">,
 	platform: Platform = Platform.NA1
@@ -32,9 +32,7 @@ export default async function saveGame(
 	const [existingResult] = await db
 		.select()
 		.from(gameResultTable)
-		.where(
-			eq(gameResultTable.id, typeof id === "number" ? id : parseInt(id, 10))
-		)
+		.where(eq(gameResultTable.id, id))
 		.limit(1);
 	if (existingResult) {
 		if (
