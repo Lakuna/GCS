@@ -11,12 +11,12 @@ import {
 } from "db/schema";
 import { and, eq, or } from "drizzle-orm";
 import type TournamentGames from "types/riot/TournamentGames";
-import parseJsonSafe from "util/parseJsonSafe";
 import db from "db/db";
 import getFormatGameCount from "util/getFormatGameCount";
 import getPlatformForRegion from "util/getPlatformForRegion";
 import leftHierarchy from "util/leftHierarchy";
 import makeTournamentCodes from "riot/makeTournamentCodes";
+import parseJsonSafe from "util/parseJsonSafe";
 import saveGame from "util/saveGame";
 
 /**
@@ -24,7 +24,7 @@ import saveGame from "util/saveGame";
  * @public
  */
 export const POST = async (request: NextRequest): Promise<NextResponse> => {
-	const games = parseJsonSafe<TournamentGames[]>(await request.text());
+	const games = parseJsonSafe(await request.text()) as TournamentGames[];
 	if (games.length > 1) {
 		return new NextResponse(
 			"More than one game was returned. Did you use the same tournament code twice?",

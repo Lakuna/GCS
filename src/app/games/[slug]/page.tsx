@@ -265,7 +265,7 @@ export default async function Page(
 							.toString()
 							.padStart(2, "0")}`}
 					</p>
-					<p>{`Game ID: ${gameResult.value.id.toString()}`}</p>
+					<p>{`Game ID: ${gameResult.value.id}`}</p>
 					<p>{`Map: ${(await getMaps()).find((map) => map.mapId === gameResult.value.map)?.mapName ?? "Unknown"}`}</p>
 					<p>{`Mode: ${gameResult.value.mode}`}</p>
 					<p>{`Queue: ${queue ? `${queue.map}${queue.description ? ` - ${queue.description}` : ""}` : "Unknown"}`}</p>

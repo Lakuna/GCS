@@ -23,5 +23,5 @@ export default async function getMatchDto(
 		void 0,
 		key
 	);
-	return parseJsonSafe<MatchDto>(await response.text());
+	return parseJsonSafe(await response.text()) as MatchDto;
 }

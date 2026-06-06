@@ -474,8 +474,7 @@ export const gameResultTable = pgTable("gameResult", {
 	// The duration of the game in milliseconds.
 	duration: integer().notNull(),
 
-	// The game ID of the game in the Riot API. Stored as varchar because Riot game IDs
-	// exceed JavaScript's safe integer range and must not be coerced to Number.
+	// The game ID. Stored as varchar because Riot game IDs exceed Number.MAX_SAFE_INTEGER.
 	id: varchar({ length: 20 }).primaryKey(),
 
 	// The ID of the map that the game was played on.
