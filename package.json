@@ -16,7 +16,7 @@
 		"@next/env": "^16.1.6",
 		"@svgr/webpack": "^8.1.0",
 		"drizzle-kit": "^0.31.8",
-		"drizzle-orm": "^0.45.1",
+		"drizzle-orm": "^0.45.2",
 		"next": "16.1.6",
 		"next-auth": "^5.0.0-beta.30",
 		"react": "^19.2.4",
