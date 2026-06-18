@@ -25,6 +25,7 @@ import getPlayerUrl from "util/getPlayerUrl";
 import getSeasonUrl from "util/getSeasonUrl";
 import getTeamUrl from "util/getTeamUrl";
 import leftHierarchy from "util/leftHierarchy";
+import opgg from "util/opgg";
 import { redirect } from "next/navigation";
 import style from "./page.module.scss";
 import ugg from "util/ugg";
@@ -138,6 +139,8 @@ export default async function Page(
 									<>
 										{" | "}
 										<Link href={ugg(...accounts)}>{"U.GG"}</Link>
+										{" | "}
+										<Link href={opgg(...accounts)}>{"OP.GG"}</Link>
 									</>
 								)}
 							</h2>
