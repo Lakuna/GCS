@@ -12,8 +12,8 @@ import {
 import { and, eq, or } from "drizzle-orm";
 import type TournamentGames from "types/riot/TournamentGames";
 import db from "db/db";
-import getFormatGameCount from "util/getFormatGameCount";
 import getPlatformForRegion from "util/getPlatformForRegion";
+import isMatchDecided from "core/match/domain/isMatchDecided";
 import leftHierarchy from "util/leftHierarchy";
 import makeTournamentCodes from "riot/makeTournamentCodes";
 import saveGame from "util/saveGame";
@@ -75,7 +75,7 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
 			return new NextResponse(void 0, { status: 200 });
 		}
 
-		// Count the number of wins that each team has.
+		// Load the winning game results for the match.
 		const winningTeamGameResults = leftHierarchy(
 			await db
 				.select()
@@ -97,18 +97,9 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
 				),
 			"teamGameResult"
 		);
-		const wins = new Map<number, number>();
-		for (const result of winningTeamGameResults) {
-			if (!result.teamId) {
-				continue;
-			}
 
-			wins.set(result.teamId, (wins.get(result.teamId) ?? 0) + 1);
-		}
-
-		// Check if another game needs to be made.
-		const [, , toWin] = getFormatGameCount(match.format);
-		if (wins.values().some((value) => value >= toWin)) {
+		// If the match is already decided, no further game is needed.
+		if (isMatchDecided(match, winningTeamGameResults)) {
 			return new NextResponse(void 0, { status: 200 });
 		}
 
