@@ -9,6 +9,7 @@ import type { JSX } from "react";
 import type { LinkProps } from "./Link";
 import LocalDate from "./LocalDate";
 import getMatchDateTime from "util/getMatchDateTime";
+import getMatchScore from "core/match/domain/getMatchScore";
 import getMatchUrl from "util/getMatchUrl";
 import multiclass from "util/multiclass";
 import placeholder from "./assets/placeholder.png";
@@ -57,6 +58,7 @@ export default function MatchCard({
 	const blueTeam = teams?.find((team) => team.id === match.blueTeamId);
 	const redTeam = teams?.find((team) => team.id === match.redTeamId);
 	const dateTime = season && getMatchDateTime(match, season);
+	const [blueScore, redScore] = getMatchScore(match, teamGameResults ?? []);
 
 	return (
 		<a
@@ -84,7 +86,7 @@ export default function MatchCard({
 			}
 			<h3 className={style["score"]}>
 				{teamGameResults?.length ?
-					`${teamGameResults.filter(({ isWinner, teamId }) => isWinner && teamId === blueTeam?.id).length.toString()}-${teamGameResults.filter(({ isWinner, teamId }) => isWinner && teamId === redTeam?.id).length.toString()}`
+					`${blueScore.toString()}-${redScore.toString()}`
 				:	"VS"}
 			</h3>
 			{redTeam ?

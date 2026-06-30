@@ -12,9 +12,9 @@ import type { JSX } from "react";
 import Submit from "components/Submit";
 import createForfeit from "util/createForfeit";
 import db from "db/db";
-import getFormatGameCount from "util/getFormatGameCount";
 import getGameUrl from "util/getGameUrl";
 import hasRiotApiKey from "util/hasRiotApiKey";
+import isMatchDecided from "core/match/domain/isMatchDecided";
 import leftHierarchy from "util/leftHierarchy";
 import makeTournamentCodes from "riot/makeTournamentCodes";
 import { revalidatePath } from "next/cache";
@@ -79,7 +79,7 @@ export default function ForfeitForm({
 				await db.insert(teamGameResultTable).values(teams);
 				revalidatePath(getGameUrl(game));
 
-				// Count the number of wins that each team has.
+				// Load the winning game results for the match.
 				const winningTeamGameResults = leftHierarchy(
 					await db
 						.select()
@@ -101,21 +101,10 @@ export default function ForfeitForm({
 						),
 					"teamGameResult"
 				);
-				const wins = new Map<number, number>();
-				for (const result of winningTeamGameResults) {
-					if (!result.teamId) {
-						continue;
-					}
 
-					wins.set(result.teamId, (wins.get(result.teamId) ?? 0) + 1);
-				}
-
-				// Make another game if necessary.
-				const [, , toWin] = getFormatGameCount(match.format);
-				for (const a of wins.values()) {
-					if (a >= toWin) {
-						return void 0;
-					}
+				// If the match is already decided, no further game is needed.
+				if (isMatchDecided(match, winningTeamGameResults)) {
+					return void 0;
 				}
 
 				// Make a new tournament code for the next game.
