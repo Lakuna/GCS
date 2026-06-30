@@ -93,6 +93,6 @@ code keeps working exactly as before. Over time the core grows and the
 framework layer thins out.
 
 The **standings / match-scoring** slice is the first one (see the sweep-bug
-fix). Expect `src/util/*` domain-ish helpers (`getMatchWinner`, `getMatchScore`,
-`getFormatGameCount`, …) to migrate into `core` as the slices that use them are
-touched.
+fix). Expect `src/util/*` domain-ish helpers (`getFormatGameCount`,
+`getMatchDateTime`, `isMatchOver`, …) to migrate into `core` as the slices that
+use them are touched.
